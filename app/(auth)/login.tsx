@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  ImageBackground,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
@@ -35,16 +37,29 @@ const Login = () => {
   };
 
   return (
-    <View className="flex-1 justify-center items-center p-6 bg-gray-50">
+
+     <ImageBackground
+      source={require("../../assets/images/login/img-01.jpg")}
+      className="flex-1 justify-center items-center"
+      resizeMode="cover"
+    >
+    <View className="w-full  p-10 flex-1 items-center justify-center">
+
+      <Image
+          source={require("../../assets/images/login/logo.png")} 
+          className="w-32 h-32 mb-6 rounded-full"
+          resizeMode="contain"
+        />
+
       <Text className="text-4xl font-bold text-center mb-6 text-gray-800">
-        Login
+        LOGIN
       </Text>
 
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 mb-4 text-gray-900"
+        className="w-full  border border-gray-300 text-lg rounded-lg px-4 py-3 mb-4 text-white"
         keyboardType="email-address"
         autoCapitalize="none"
       />
@@ -54,12 +69,12 @@ const Login = () => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 mb-4 text-gray-900"
+        className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 mb-4 text-white"
       />
 
       <TouchableOpacity
         onPress={handleLogin}
-        className="w-full bg-blue-600 rounded-lg p-4 mb-4"
+        className="w-full bg-transparent border rounded-lg p-4 mb-4 mt-8"
       >
         {isLoading ? (
           <ActivityIndicator color="#fff" size="large" />
@@ -74,11 +89,12 @@ const Login = () => {
         className="mt-2"
         onPress={() => router.push("/register")}
       >
-        <Text className="text-center text-blue-500 text-lg">
+        <Text className="text-center text-white text-lg">
           Don't have an account? Register
         </Text>
       </Pressable>
     </View>
+    </ImageBackground>
   );
 };
 

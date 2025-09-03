@@ -5,7 +5,9 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  Image,
+  ImageBackground,
 } from "react-native"
 import React, { useState } from "react"
 import { useRouter } from "expo-router"
@@ -45,44 +47,56 @@ const Register = () => {
   }
 
   return (
-    <View className="flex-1 w-full justify-center align-items-center p-4">
-      <Text className="text-4xl text-center mb-2">Register</Text>
+    
+    <ImageBackground source={require("../../assets/images/login/img-02.jpg")} className="flex-1 justify-center items-center" resizeMode="cover">
+
+    <View className="absolute inset-0 bg-black opacity-50" /> 
+
+    <View className="flex-1 w-full justify-center align-items-center p-4 ">
+        <Image
+            source={require("../../assets/images/login/logo.png")} 
+            className="w-32 h-32 mb-6 rounded-full self-center"
+            resizeMode="contain"
+          />
+
+      <Text className="text-4xl text-center mb-2 text-white">Register</Text>
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        className="bg-surface border border-gray-300 rounded px-4 py-3 mb-4 text-gray-900"
+        className="bg-surface border border-gray-300 text-lg text-white rounded px-4 py-3 mb-4"
       />
       <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        className="bg-surface border border-gray-300 rounded px-4 py-3 mb-4 text-gray-900"
+        className="bg-surface border border-gray-300 text-lg text-white rounded px-4 py-3 mb-4"
       />
       <TextInput
         placeholder="Confirm password"
         value={cPassword}
         onChangeText={setCPassword}
         secureTextEntry
-        className="bg-surface border border-gray-300 rounded px-4 py-3 mb-4 text-gray-900"
+        className="bg-surface border border-gray-300 text-lg text-white rounded px-4 py-3 mb-4"
       />
       <TouchableOpacity
         onPress={handleRegister}
-        className="bg-green-600 p-4 rounded mt-2"
+        className="bg-black p-4 rounded mt-10"
       >
         {isLoading ? (
           <ActivityIndicator color="#fff" size="large" />
         ) : (
-          <Text className="text-center text-2xl">Register</Text>
+          <Text className="text-center text-white text-2xl">Register</Text>
         )}
       </TouchableOpacity>
       <Pressable className="px-6 py-3" onPress={() => router.back()}>
-        <Text className="text-xl text-center text-blue-500">
+        <Text className="text-xl text-center text-white">
           Alrady have an account? Login
         </Text>
       </Pressable>
     </View>
+    </ImageBackground>
   )
 }
 
