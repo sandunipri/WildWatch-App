@@ -39,16 +39,18 @@ const Login = () => {
   return (
 
      <ImageBackground
-      source={require("../../assets/images/login/img-01.jpg")}
-      className="flex-1 justify-center items-center"
-      resizeMode="cover"
-    >
+        source={require("../../assets/images/login/img-01.jpg")}
+        className="flex-1 w-full h-full justify-center items-center"
+        resizeMode="cover"
+      >
+
     <View className="w-full  p-10 flex-1 items-center justify-center">
 
       <Image
-          source={require("../../assets/images/login/logo.png")} 
-          className="w-32 h-32 mb-6 rounded-full"
+          source={require("../../assets/images/login/logo.png")}
+          className="w-32 h-32 m-16 rounded-full"
           resizeMode="contain"
+          style={{ maxWidth: 128, maxHeight: 128 }}
         />
 
       <Text className="text-4xl font-bold text-center mb-6 text-gray-800">

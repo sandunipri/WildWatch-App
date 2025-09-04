@@ -84,7 +84,7 @@ const TasksScreen = () => {
         <Pressable
           className="bg-blue-500 rounded-full p-5 shadow-lg"
           onPress={() => {
-            router.push("/(dashboard)/tasks/new")
+            router.push("/tasks/new")
           }}
         >
           <MaterialIcons name="add" size={28} color={"#fff"} />
@@ -105,7 +105,7 @@ const TasksScreen = () => {
               <View className="flex-row">
                 <TouchableOpacity
                   className="bg-yellow-300 px-3 py-1 rounded"
-                  onPress={() => router.push(`/(dashboard)/tasks/${task.id}`)}
+                  onPress={() => router.push(`/tasks/${task.id}`)}
                 >
                   <Text className="text-xl">Edit</Text>
                 </TouchableOpacity>

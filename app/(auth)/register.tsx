@@ -53,11 +53,12 @@ const Register = () => {
     <View className="absolute inset-0 bg-black opacity-50" /> 
 
     <View className="flex-1 w-full justify-center align-items-center p-4 ">
-        <Image
-            source={require("../../assets/images/login/logo.png")} 
-            className="w-32 h-32 mb-6 rounded-full self-center"
-            resizeMode="contain"
-          />
+      <Image
+         source={require("../../assets/images/login/logo.png")}
+         className="w-32 h-32 m-16 rounded-full"
+         resizeMode="contain"
+         style={{ maxWidth: 128, maxHeight: 128 }}
+        />
 
       <Text className="text-4xl text-center mb-2 text-white">Register</Text>
       <TextInput
