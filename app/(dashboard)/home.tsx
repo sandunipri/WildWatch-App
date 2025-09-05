@@ -5,7 +5,6 @@ const HomeScreen = () => {
   return (
     <View className="flex-1 w-full justify-center align-items-center">
       <View>
-
       </View>
       <Text className="text-center text-4xl">Home screen</Text>
     </View>

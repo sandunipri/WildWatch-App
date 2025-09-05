@@ -12,12 +12,14 @@ import {
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { login } from "@/services/authService";
+import { Ionicons } from "@expo/vector-icons";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
     if (isLoading) return;
@@ -65,15 +67,22 @@ const Login = () => {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 mb-4 text-white"
-      />
-
+     <View className="w-full border border-gray-300 rounded-lg px-4  mb-4 flex-row items-center">
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+          className="flex-1 text-white text-lg"
+        />
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <Ionicons
+            name={showPassword ? "eye-off" : "eye"}
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
+    </View>
       <TouchableOpacity
         onPress={handleLogin}
         className="w-full bg-transparent border rounded-lg p-4 mb-4 mt-8"
