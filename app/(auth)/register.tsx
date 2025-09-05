@@ -8,11 +8,15 @@ import {
   ActivityIndicator,
   Image,
   ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native"
 import React, { useState } from "react"
 import { useRouter } from "expo-router"
 import { register } from "@/services/authService"
 import "./../../global.css"
+import { Ionicons } from "@expo/vector-icons"
 
 
 const Register = () => {
@@ -21,6 +25,8 @@ const Register = () => {
   const [password, setPassword] = useState<string>("")
   const [cPassword, setCPassword] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState(false);
+  
 
   const handleRegister = async () => {
     // if(email)
@@ -47,57 +53,117 @@ const Register = () => {
   }
 
   return (
+      <KeyboardAvoidingView
+         behavior={Platform.OS === 'android' ? 'padding' : 'height'}
+          className="flex-1 pt-12 bg-black"
+        >
+        <ScrollView 
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        >
+        <View className=" w-full p-10 flex-1 justify-center">
     
-    <ImageBackground source={require("../../assets/images/login/img-02.jpg")} className="flex-1 justify-center items-center" resizeMode="cover">
+        <View className="items-center">
+             <Image
+              source={require("../../assets/images/login/logo.png")}
+              className="w-40 h-40 rounded-full"
+              resizeMode="contain"
+              style={{ maxWidth: 128, maxHeight: 128 }}
+            />
+        </View>
 
-    <View className="absolute inset-0 bg-black opacity-50" /> 
+       <Text className="text-3xl font-bold text-center  text-white">Welcome</Text>
+       <Text className="text-lg font-bold text-center mt-4 mb-4  text-white">Create your new account</Text>
+      
+          <View className="mb-5">
+            <View className="bg-white/10 rounded-xl px-4 py-3 border border-white/20 flex-row items-center mb-4">
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={email}
+              onChangeText={setEmail}
+              className="flex-1 text-white  text-lg"
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            </View>
+      
+          <View className="bg-white/10 rounded-xl px-4 py-3 mb-4 border border-white/20 flex-row items-center">
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor="rgba(255, 255, 255, 0.5)"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            className="flex-1 text-white text-lg"
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye-off" : "eye"}
+              size={24}
+              color="white"
+            />
+          </TouchableOpacity>
+          </View>
+          <View className="bg-white/10 rounded-xl px-4 py-3 border border-white/20 flex-row items-center">
+          <TextInput
+            placeholder="confirm Password"
+            placeholderTextColor="rgba(255, 255, 255, 0.5)"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            className="flex-1 text-white text-lg"
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye-off" : "eye"}
+              size={24}
+              color="white"
+            />
+          </TouchableOpacity>
+          </View>
+        </View>
 
-    <View className="flex-1 w-full justify-center align-items-center p-4 ">
-      <Image
-         source={require("../../assets/images/login/logo.png")}
-         className="w-32 h-32 m-16 rounded-full"
-         resizeMode="contain"
-         style={{ maxWidth: 128, maxHeight: 128 }}
-        />
 
-      <Text className="text-4xl text-center mb-2 text-white">Register</Text>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        className="bg-surface border border-gray-300 text-lg text-white rounded px-4 py-3 mb-4"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        className="bg-surface border border-gray-300 text-lg text-white rounded px-4 py-3 mb-4"
-      />
-      <TextInput
-        placeholder="Confirm password"
-        value={cPassword}
-        onChangeText={setCPassword}
-        secureTextEntry
-        className="bg-surface border border-gray-300 text-lg text-white rounded px-4 py-3 mb-4"
-      />
+
       <TouchableOpacity
         onPress={handleRegister}
-        className="bg-black p-4 rounded mt-10"
+        className="bg-yellow-400 rounded-xl p-4 mt-8"
       >
         {isLoading ? (
           <ActivityIndicator color="#fff" size="large" />
         ) : (
-          <Text className="text-center text-white text-2xl">Register</Text>
+          <Text className="text-center text-green-900 text-xl font-bold">Register</Text>
         )}
       </TouchableOpacity>
-      <Pressable className="px-6 py-3" onPress={() => router.back()}>
-        <Text className="text-xl text-center text-white">
-          Alrady have an account? Login
-        </Text>
-      </Pressable>
+
+       <View className="flex-row items-center my-8">
+                  <View className="flex-1 h-px bg-white/20" />
+                  <Text className="text-white/70 mx-3">Or continue with</Text>
+                  <View className="flex-1 h-px bg-white/20" />
+          </View>
+
+          <View className="flex-row justify-center mt-5">
+                   <Pressable
+                  className="mt-2"
+                  onPress={() => router.push("/login")}
+                >
+                  <Text className="text-center text-white text-lg">
+                    Don't have an account? <Text className="text-yellow-400 font-semibold">Login</Text> 
+                  </Text>
+                </Pressable>
+                 </View>
+
+      <View className="p-5 items-center">
+              <Text className="text-white text-xs">
+                  © 2023 YourApp. All rights reserved
+              </Text>
+      </View>
     </View>
-    </ImageBackground>
+    </ScrollView>
+    </KeyboardAvoidingView>
+
+  
   )
 }
 

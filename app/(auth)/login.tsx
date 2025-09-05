@@ -45,13 +45,13 @@ const Login = () => {
 
   <KeyboardAvoidingView
      behavior={Platform.OS === 'android' ? 'padding' : 'height'}
-      className="flex-1 pt-28 bg-black"
+      className="flex-1  bg-black"
     >
     <ScrollView 
     contentContainerStyle={{ flexGrow: 1 }}
     keyboardShouldPersistTaps="handled"
     >
-    <View className=" w-full p-10 flex-1 justify-center mb-40">
+    <View className=" w-full p-10 flex-1 justify-center ">
 
     <View className="items-center">
          <Image
