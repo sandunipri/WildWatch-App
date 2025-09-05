@@ -3,4 +3,5 @@ export interface Task {
   title: string
   description: string
   image ?: string
+  userId?: string;
 }

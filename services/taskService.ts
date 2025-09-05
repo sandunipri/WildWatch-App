@@ -17,10 +17,26 @@ import { db } from "@/firebase"
 export const taskColRef = collection(db, "tasks")
 
 // firebase firestore
-export const createTask = async (task: Task) => {
-  const docRef = await addDoc(taskColRef, task)
-  return docRef.id
-}
+// export const createTask = async (task: Task) => {
+//   const docRef = await addDoc(taskColRef, task)
+//   return docRef.id
+// }
+
+export const createTask = async (taskData: Omit<Task, 'id'>): Promise<Task> => {
+  try {
+    const docRef = await addDoc(taskColRef, {
+      ...taskData,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    });
+    
+    return { id: docRef.id, ...taskData };
+  } catch (error) {
+    console.error('Error creating task:', error);
+    throw error;
+  }
+};
+
 
 export const updateTask = async (id: string, task: Task) => {
   const docRef = doc(db, "tasks", id)

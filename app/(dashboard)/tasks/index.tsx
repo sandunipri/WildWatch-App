@@ -4,7 +4,8 @@ import {
   Pressable,
   ScrollView,
   TouchableOpacity,
-  Alert
+  Alert,
+  Image
 } from "react-native"
 import React, { useEffect, useState } from "react"
 import { getAllTask, getAllTaskData, taskColRef } from "@/services/taskService"
@@ -33,35 +34,25 @@ const TasksScreen = () => {
       .finally(() => {
         hideLoader()
       })
-    //  await getAllTask()
-    // .then((data) => {
-    //   console.log(data)
-    // })
-    // .catch((err) => {
-    //   console.error(err)
-    // })
+
   }
 
-  // useEffect(() => {
-  //   handleFetchData()
-  // }, [segment])
 
   useEffect(() => {
-    const unsubcribe = onSnapshot(
-      taskColRef,
-      (snapshot) => {
-        const taskList = snapshot.docs.map((taskRef) => ({
-          id: taskRef.id,
-          ...taskRef.data()
-        })) as Task[]
-        setTasks(taskList)
-      },
-      (err) => {
-        console.error(err)
-      }
-    )
-    return () => unsubcribe()
-  }, [])
+  const unsubscribe = onSnapshot(
+    taskColRef,
+    (snapshot) => {
+      const taskList = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Task[];
+      setTasks(taskList);
+    },
+    (err) => console.error(err)
+  );
+  return () => unsubscribe();
+}, []);
+
 
   const hadnleDelete = () => {
     Alert.alert("Alert Title", "Alert Desc", [
@@ -78,6 +69,7 @@ const TasksScreen = () => {
   }
 
   return (
+    
     <View className="flex-1 w-full justify-center align-items-center">
       <Text className="text-center text-4xl">Tasks screen</Text>
       <View className="absolute bottom-5 right-5 z-40">
@@ -98,6 +90,10 @@ const TasksScreen = () => {
               key={task.id}
               className="bg-gray-200 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
             >
+              {task.image && (
+                <Image source={{ uri: task.image }} className="w-full h-48 mb-2" />
+              )}
+
               <Text className="text-lg font-semibold">{task.title}</Text>
               <Text className="text-sm text-gray-700 mb-2">
                 {task.description}
