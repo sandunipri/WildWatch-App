@@ -43,6 +43,7 @@ export const deleteTask = async (id: string) => {
   
 }
 
+
 export const getAllTaskData = async () => {
   const snapshot = await getDocs(taskColRef)
   const taskList = snapshot.docs.map((taskRef) => ({
