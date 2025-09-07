@@ -13,14 +13,7 @@ import api from "./config/api"
 import { Task } from "@/types/task"
 import { db } from "@/firebase"
 
-// for refer to collection
 export const taskColRef = collection(db, "tasks")
-
-// firebase firestore
-// export const createTask = async (task: Task) => {
-//   const docRef = await addDoc(taskColRef, task)
-//   return docRef.id
-// }
 
 export const createTask = async (taskData: Omit<Task, 'id'>): Promise<Task> => {
   try {
@@ -47,6 +40,7 @@ export const updateTask = async (id: string, task: Task) => {
 export const deleteTask = async (id: string) => {
   const docRef = doc(db, "tasks", id)
   return await deleteDoc(docRef)
+  
 }
 
 export const getAllTaskData = async () => {
@@ -67,19 +61,16 @@ export const getTaskById = async (id: string) => {
   return task
 }
 
-export const getAllTaskByUserId = async (userId: string) => {
-  const q = query(taskColRef, where("userId", "==", userId))
+export const getAllTaskByUserId = async (userId: string): Promise<Task[]> => {
+  const q = query(taskColRef, where("userId", "==", userId));
+  const querySnapshot = await getDocs(q);
 
-  const querySnapshot = await getDocs(q)
-  const taskList = querySnapshot.docs.map((taskRef) => ({
+  return querySnapshot.docs.map((taskRef) => ({
     id: taskRef.id,
-    ...taskRef.data()
-  })) as Task[]
-  return taskList
-}
+    ...taskRef.data(),
+  })) as Task[];
+};
 
-// ================================================================
-// axios with mock server api intrigation
 export const getAllTask = async () => {
   const res = await api.get("/task")
   return res.data

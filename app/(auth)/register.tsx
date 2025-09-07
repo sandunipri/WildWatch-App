@@ -108,9 +108,9 @@ const Register = () => {
           <View className="bg-white/10 rounded-xl px-4 py-3 border border-white/20 flex-row items-center">
           <TextInput
             placeholder="confirm Password"
+            value={cPassword}
+            onChangeText={setCPassword}
             placeholderTextColor="rgba(255, 255, 255, 0.5)"
-            value={password}
-            onChangeText={setPassword}
             secureTextEntry={!showPassword}
             className="flex-1 text-white text-lg"
           />
@@ -149,7 +149,8 @@ const Register = () => {
                   onPress={() => router.push("/login")}
                 >
                   <Text className="text-center text-white text-lg">
-                    Don't have an account? <Text className="text-yellow-400 font-semibold">Login</Text> 
+                    Already have an account? 
+                     <Text className="text-yellow-400 font-semibold">Login</Text> 
                   </Text>
                 </Pressable>
                  </View>

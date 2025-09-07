@@ -5,15 +5,20 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  Image
+  Image,
+  SafeAreaView
 } from "react-native"
 import React, { useEffect, useState } from "react"
-import { getAllTask, getAllTaskData, taskColRef } from "@/services/taskService"
+import { deleteTask, getAllTaskByUserId, taskColRef } from "@/services/taskService"
 import { MaterialIcons } from "@expo/vector-icons"
 import { useRouter, useSegments } from "expo-router"
 import { Task } from "@/types/task"
 import { useLoader } from "@/context/LoaderContext"
 import { onSnapshot } from "firebase/firestore"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { auth } from "@/firebase"
+import { query, where } from "firebase/firestore";
+
 
 const TasksScreen = () => {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -21,9 +26,15 @@ const TasksScreen = () => {
   const router = useRouter()
   const { hideLoader, showLoader } = useLoader()
 
+  const insets = useSafeAreaInsets();
+
   const handleFetchData = async () => {
+    if(!auth.currentUser){
+      Alert.alert("Error", "You must be logged in");
+      return;
+    }
     showLoader()
-    await getAllTaskData()
+    await getAllTaskByUserId(auth.currentUser.uid)
       .then((data) => {
         setTasks(data)
         console.log(data)
@@ -35,12 +46,18 @@ const TasksScreen = () => {
         hideLoader()
       })
 
-  }
-
+    }
 
   useEffect(() => {
+  if (!auth.currentUser) {
+    Alert.alert("Error", "You must be logged in");
+    return;
+  }
+  
+  const q = query(taskColRef, where("userId", "==", auth.currentUser?.uid)); 
+
   const unsubscribe = onSnapshot(
-    taskColRef,
+    q,
     (snapshot) => {
       const taskList = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -54,27 +71,35 @@ const TasksScreen = () => {
 }, []);
 
 
-  const hadnleDelete = () => {
+  const hadnleDelete = (id: string) => {
     Alert.alert("Alert Title", "Alert Desc", [
       { text: "Cancel" },
       {
         text: "Delete",
         onPress: async () => {
-          // user is confirmed
-          // so delete task
-          //
+
+          try{
+            showLoader();
+            await deleteTask(id)
+          }catch(err){
+            console.error("Error deleting task:",err)
+            Alert.alert("Error", "Could not delete task.");
+          }finally{
+            hideLoader()
+          }
         }
       }
     ])
   }
 
   return (
-    
+
+    <SafeAreaView className={`flex-1 bg-white pt-${insets.top} pb-${insets.bottom}`}>  
     <View className="flex-1 w-full justify-center align-items-center">
-      <Text className="text-center text-4xl">Tasks screen</Text>
+      <Text className="mt-10 p-5 text-4xl">Tasks screen</Text>
       <View className="absolute bottom-5 right-5 z-40">
         <Pressable
-          className="bg-blue-500 rounded-full p-5 shadow-lg"
+          className="bg-green-900 rounded-full p-5 shadow-lg"
           onPress={() => {
             router.push("/tasks/new")
           }}
@@ -83,12 +108,12 @@ const TasksScreen = () => {
         </Pressable>
       </View>
 
-      <ScrollView className="mt-4">
+      <ScrollView className="flex-1 mt-5 ">
         {tasks.map((task) => {
           return (
             <View
               key={task.id}
-              className="bg-gray-200 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
+              className="bg-gray-300 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
             >
               {task.image && (
                 <Image source={{ uri: task.image }} className="w-full h-48 mb-2" />
@@ -105,7 +130,9 @@ const TasksScreen = () => {
                 >
                   <Text className="text-xl">Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity className="bg-red-500 px-3 py-1 rounded ml-3">
+                <TouchableOpacity className="bg-red-500 px-3 py-1 rounded ml-3"
+                  onPress={() => hadnleDelete(task.id!)}
+                >
                   <Text className="text-xl">Delete</Text>
                 </TouchableOpacity>
               </View>
@@ -114,6 +141,7 @@ const TasksScreen = () => {
         })}
       </ScrollView>
     </View>
+    </SafeAreaView>
   )
 }
 
