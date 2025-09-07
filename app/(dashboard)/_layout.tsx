@@ -7,14 +7,14 @@ import { MaterialIcons } from "@expo/vector-icons"
 const DashboardLayout = () => {
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-black">
       <Tabs
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: "#2ecc71",
           tabBarInactiveTintColor: "#2c3e50",
           tabBarStyle: {
-            backgroundColor: "#bdc3c7"
+          backgroundColor: "#bdc3c7"
           }
         }}
       >
