@@ -40,8 +40,13 @@ const ProfileScreen = () => {
     <ScrollView>
 
     <View className="items-center mb-6 mt-24">
-      <Image source = {{ uri: 'https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=76&q=80'}} 
-      className="w-40 h-40 rounded-full border-4 border-gray-300"
+      <Image
+        source={{
+          uri: profile.photoURL 
+            ? profile.photoURL 
+            : "https://via.placeholder.com/150"
+        }}
+        className="w-40 h-40 rounded-full border-4 border-gray-300"
       />
       <Text className="text-3xl font-bold">{profile.name}</Text>
       <Text className="text-gray-600">{profile.email}</Text>

@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { auth } from '@/firebase';
 import { useRouter } from 'expo-router';
 import { updateUser } from '@/services/userService';
+import { UploadImage } from '@/services/storageService';
+import * as ImagePicker from "expo-image-picker";
 
 const updateProfile = () => {
 
@@ -14,15 +16,41 @@ const updateProfile = () => {
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false)
 
+  // upload profile picture
+  const [image, setImage] = useState<string | undefined>('');
+
+  const pickImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (err) {
+      console.error("Image picker error:", err);
+    }
+  }
+
   const saveUpates = async () => {
     if (!user) return
     setLoading(true)
     try {
+
+      let photoURL = user?.photoURL?? null;
+
+      if (image) {
+        photoURL = await UploadImage(image, `profileImages/${user.uid}/avatar.jpg`);
+      }
+
       await updateUser(user.uid, {
         name,
         phoneNumber,
         address,
-        bio
+        bio,
+        photoURL
       })
       router.back() 
     } catch (err) {
@@ -37,11 +65,16 @@ const updateProfile = () => {
     <ScrollView className='flex-1 bg-gray-100 p-6 mt-10'>
         <Text className='text-2xl font-bold'>updateProfile</Text>
     <View>
-        {/* profile picture */}
+        <TouchableOpacity onPress={pickImage}>
+          <Image
+            source={{
+              uri: image ?? user?.photoURL ?? "https://via.placeholder.com/150",
+            }}
+            className="w-40 h-40 rounded-full border-4 border-gray-300"
+          />
+          <Text className="text-blue-500 text-center mt-2">Change Photo</Text>
+        </TouchableOpacity>
 
-        <Image source={{uri:'https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=76&q=80'}}
-        className='w-40 h-40 rounded-full border-4 border-gray-300'     
-        />
 
         <TextInput
         placeholder='Name'

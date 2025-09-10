@@ -289,12 +289,10 @@ const TaskFormScreen = () => {
     try {
       showLoader();
 
-      let imageUrl = image; // Keep existing image URL if no new image
+      let imageUrl = image; 
       
-      // Only upload if we have a new local image (starts with file://)
       if (image && image.startsWith('file://')) {
         try {
-          // Create a more unique filename
           const timestamp = Date.now();
           const filename = `tasks/${auth.currentUser.uid}/${timestamp}.jpg`;
           imageUrl = await UploadImage(image, filename);

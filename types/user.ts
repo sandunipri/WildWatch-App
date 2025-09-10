@@ -1,4 +1,5 @@
 export interface User {
+    image: string | undefined;
     uid: string;
     email: string;
     password: string;
@@ -7,5 +8,5 @@ export interface User {
     address?: string;
     bio? : string;
     createdAt: string;  
-    photoURL?: string;
+    photoURL?: string | null;
 }
