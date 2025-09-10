@@ -90,7 +90,7 @@ const Login = () => {
     />
     <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
       <Ionicons
-        name={showPassword ? "eye-off" : "eye"}
+        name={showPassword ? "eye" : "eye-off"}
         size={24}
         color="white"
       />
@@ -136,7 +136,7 @@ const Login = () => {
 
        <View className="p-5 items-center">
         <Text className="text-white text-xs">
-            © 2023 YourApp. All rights reserved
+            © 2025 wildwatchApp. All rights reserved
         </Text>
        </View>
     </View>

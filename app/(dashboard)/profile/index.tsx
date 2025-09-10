@@ -1,11 +1,12 @@
 import { View, Text, ScrollView, SafeAreaView,Image, TouchableOpacity } from "react-native"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { User } from "@/types/user";
 import { auth } from "@/firebase";
 import { getUserById } from "@/services/userService";
+import { useFocusEffect } from "@react-navigation/native";
 
 const ProfileScreen = () => {
 
@@ -13,15 +14,18 @@ const ProfileScreen = () => {
     const user = auth.currentUser
     const [profile, setProfile] = useState<User | null>(null);
 
-    useEffect(()=>{
-      const setProfileDetails = async () => {
-        if(user){
-          const data = await getUserById(user.uid)
-          setProfile(data)
-        }
+    const loadProfile = async () => {
+      if (user){
+        const profileData = await getUserById(user.uid)
+        setProfile(profileData)
       }
-      setProfileDetails()
-    },[user])
+    }
+
+    useFocusEffect(
+      useCallback(() => {
+        loadProfile();
+      },[user])
+    )
 
   if (!profile) {
     return (
@@ -74,7 +78,7 @@ const ProfileScreen = () => {
         {/* Actions */}
     <View className="bg-white rounded-xl shadow-sm p-4">
       <TouchableOpacity className="flex-row items-center py-3 border-b border-gray-200"
-      onPress={()=>router.push("/updateProfile")}
+      onPress={()=>router.push("/(dashboard)/profile/updateProfile")}
       >
         <Ionicons name="settings-outline" size={22} color="#374151" />
         <Text className="ml-3 text-gray-800">Account Settings</Text>

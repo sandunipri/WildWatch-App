@@ -99,7 +99,7 @@ const Register = () => {
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Ionicons
-              name={showPassword ? "eye-off" : "eye"}
+              name={showPassword ? "eye" : "eye-off"}
               size={24}
               color="white"
             />
@@ -116,7 +116,7 @@ const Register = () => {
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Ionicons
-              name={showPassword ? "eye-off" : "eye"}
+              name={showPassword ? "eye" : "eye-off"}
               size={24}
               color="white"
             />
@@ -157,7 +157,7 @@ const Register = () => {
 
       <View className="p-5 items-center">
               <Text className="text-white text-xs">
-                  © 2023 YourApp. All rights reserved
+                  © 2025 wildwatchApp. All rights reserved
               </Text>
       </View>
     </View>

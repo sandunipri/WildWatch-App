@@ -25,7 +25,7 @@ const FooterNav = () => {
         }}
       >
         <Link
-          href={"/profile"}
+          href={"/profile/updateProfile"}
           style={{
             color: "#fff",
             padding: 10
@@ -40,7 +40,7 @@ const FooterNav = () => {
             pathname: "/tasks/[id]",
             params: {
               id: "444",
-              name: "shamodha",
+              name: "sanduni",
               age: 40,
               address: "colombo"
             }
