@@ -59,18 +59,20 @@ const DashboardLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="setting"
+          name="chat"
           options={{
-            title: "Setting",
+            title: "Chat",
             tabBarIcon: (data) => (
               <MaterialIcons
-                name="settings"
+                name="chat"
                 size={data.size}
                 color={data.color}
               />
             )
           }}
         />
+
+ 
       </Tabs>
     </SafeAreaView>
   )

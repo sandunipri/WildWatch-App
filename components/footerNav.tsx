@@ -10,14 +10,6 @@ const FooterNav = () => {
 
   return (
     <View className="flex-row justify-around border-t border-gray-300 bg-white p-[50px]">
-      {/* <Pressable
-        onPress={() => {
-          router.push("/profile")
-        }}
-        className={`${activeRouter === "/profile" ? "bg-red-500" : ""}`}
-      >
-        <Text>Profile</Text>
-      </Pressable> */}
       <View
         style={{
           backgroundColor: "#000",
@@ -64,6 +56,19 @@ const FooterNav = () => {
           Home folder test
         </Link>
       </View>  
+      <View className="bg-[#000]">
+        <Link
+          href={"/chat"}
+          style={{
+            color: "#fff",
+            padding: 10
+          }}
+          asChild
+        >
+          <Text style={{ color: "#fff" }}>Chat</Text>
+        </Link>
+      </View>
+
     </View>
   )
 }
