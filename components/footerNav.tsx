@@ -6,10 +6,20 @@ const FooterNav = () => {
   const router = useRouter()
 
   const segment = useSegments()
-  const activeRouter = "/" + segment[0] || ("" as string)
 
   return (
-    <View className="flex-row justify-around border-t border-gray-300 bg-white p-[50px]">
+    <View className="flex-row justify-around border-t border-gray-300 bg-white p-[20px]">
+      <View className="bg-[#000]">
+        <Link
+          href={"/home"}
+          style={{
+            color: "#fff",
+            padding: 10
+          }}
+        >
+          Home
+        </Link>
+      </View>  
       <View
         style={{
           backgroundColor: "#000",
@@ -17,7 +27,7 @@ const FooterNav = () => {
         }}
       >
         <Link
-          href={"/profile/updateProfile"}
+          href={"/profile"}
           style={{
             color: "#fff",
             padding: 10
@@ -42,20 +52,10 @@ const FooterNav = () => {
             padding: 10
           }}
         >
-          Go to item
+          Task
         </Link>
       </View>
-      <View className="bg-[#000]">
-        <Link
-          href={"/home"}
-          style={{
-            color: "#fff",
-            padding: 10
-          }}
-        >
-          Home folder test
-        </Link>
-      </View>  
+
       <View className="bg-[#000]">
         <Link
           href={"/chat"}

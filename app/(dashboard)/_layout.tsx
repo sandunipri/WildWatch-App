@@ -1,79 +1,103 @@
-import { View, Text, SafeAreaView, ActivityIndicator } from "react-native"
-import React, { useEffect } from "react"
-import { Slot, Tabs, useRouter } from "expo-router"
-import { MaterialIcons } from "@expo/vector-icons"
+import { View, Text, SafeAreaView,TouchableOpacity } from "react-native"
+import { Drawer } from "expo-router/drawer";
+import { useNavigation } from "expo-router"
+import { DrawerActions } from "@react-navigation/native";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons"
+import React from "react";
+import FooterTabs from "../../components/footerNav"
+
 
 
 const DashboardLayout = () => {
 
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView className="flex-1 bg-black">
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarActiveTintColor: "#2ecc71",
-          tabBarInactiveTintColor: "#2c3e50",
-          tabBarStyle: {
-          backgroundColor: "#bdc3c7"
-          }
-        }}
+      <Drawer
+        screenOptions = {({navigation}) => ({
+          drawerActiveTintColor:"white",
+          drawerInactiveTintColor:"white",
+          drawerStyle:{
+            backgroundColor:"black",
+            width:280
+          },
+          drawerWidth: 280,
+          headerTintColor:"black",
+          headerTitleStyle:{
+            fontFamily:"Poppins_700Bold",
+            fontSize:20,
+            fontWeight:"bold"
+          },
+
+          headerLeft:() => (
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+              style={{marginLeft:20}}
+            >
+              <Ionicons
+                name="menu"
+                size={30}
+                color="black"
+              />
+            </TouchableOpacity>
+          )
+        })} 
       >
-        <Tabs.Screen
+        <Drawer.Screen
           name="home"
           options={{
-            title: "Home",
-            tabBarIcon: (data) => (
+            title: "dashboard/home",
+            drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="home-filled"
-                size={data.size}
-                color={data.color}
+                size={size}
+                color={color}
               />
             )
           }}
         />
-        <Tabs.Screen
+        <Drawer.Screen
           name="tasks"
-          // name="tasks/index"
           options={{
-            title: "Task",
-            tabBarIcon: (data) => (
+            title: "dashboard/tasks",
+            drawerIcon:({color,size}) => (
               <MaterialIcons
-                name="check-circle"
-                size={data.size}
-                color={data.color}
+                name="task"
+                size={size}
+                color={color}
               />
             )
           }}
         />
-        <Tabs.Screen
+        <Drawer.Screen
           name="profile"
           options={{
-            title: "Profile",
-            tabBarIcon: (data) => (
+            title: "dashboard/profile",
+            drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="person"
-                size={data.size}
-                color={data.color}
+                size={size}
+                color={color}
               />
             )
           }}
         />
-        <Tabs.Screen
+        <Drawer.Screen
           name="chat"
           options={{
-            title: "Chat",
-            tabBarIcon: (data) => (
+            title: "dashboard/chat",
+            drawerIcon:({color,size}) => (
               <MaterialIcons
-                name="chat"
-                size={data.size}
-                color={data.color}
+                name="chat-bubble"
+                size={size}
+                color={color}
               />
             )
           }}
         />
-
- 
-      </Tabs>
+      </Drawer>
+    <FooterTabs />
     </SafeAreaView>
   )
 }

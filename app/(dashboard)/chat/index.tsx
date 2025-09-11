@@ -49,12 +49,12 @@ const chatScreen = () => {
                 className={`my-2 flex ${mine ? "items-end" : "items-start"}`}
                 >
                 <View
-                    className={`rounded-xl px-4 py-2 max-w-[100%] ${
+                    className={`rounded-xl px-4 py-2 max-w-[80%] ${
                     mine ? "bg-green-800" : "bg-white"
                     } shadow`}
                 >
                     {!mine && (
-                    <Text className="text-xs text-gray-500 mb-1 font-semibold text-left">
+                    <Text className="text-base text-gray-500 mb-1 font-semibold text-left">
                         {item.senderName || item.senderEmail || item.senderPhone}
                     </Text>
                     )}
