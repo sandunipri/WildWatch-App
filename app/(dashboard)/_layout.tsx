@@ -32,12 +32,21 @@ const DashboardLayout = () => {
 
   }, []);
 
+  const handleLogOut = async() => {
+    try{
+      await auth.signOut();
+      // navigation.navigate("");
+    }catch(err){
+      console.error(err);
+    }
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <Drawer
         screenOptions = {({navigation}) => ({
-          drawerActiveTintColor:"black",
-          drawerInactiveTintColor:"black",
+          drawerActiveTintColor:"gray",
+          drawerInactiveTintColor:"gray",
           drawerStyle:{
             backgroundColor:"white",
             width:280
@@ -46,7 +55,7 @@ const DashboardLayout = () => {
           headerTintColor:"white",
           headerTitleStyle:{
             fontFamily:"Poppins_700Bold",
-            fontSize:20,
+            fontSize:18,
             fontWeight:"bold"
           },
 
@@ -57,7 +66,7 @@ const DashboardLayout = () => {
             >
               <Ionicons
                 name="menu"
-                size={30}
+                size={24}
                 color="black"
               />
             </TouchableOpacity>
@@ -75,26 +84,27 @@ const DashboardLayout = () => {
               <Text className="text-gray-400 text-sm">{userData?.email || "Email"}</Text>
             </View>
             <DrawerItemList {...props} />
+
+            <View>
+              <TouchableOpacity
+              className="flex-row items-center border border-gray-300 rounded-xl py-3 px-3 mt-52 justify-center" 
+              onPress={handleLogOut}
+              >
+                <MaterialIcons name="logout" size={20} color="black"/>
+                <Text className="text-black text-lg ml-4">LOGOUT</Text> 
+              </TouchableOpacity>
+            </View>
           </DrawerContentScrollView>
         )}
       >
         <Drawer.Screen
-          name="profile"
-          options={{
-            title: "PROFILE",
-            drawerIcon:({color,size}) => (
-              <MaterialIcons
-                name="person"
-                size={size}
-                color={color}
-              />
-            )
-          }}
-        />
-        <Drawer.Screen
           name="home"
           options={{
-            title: "HOME",
+            title: "Home",
+            drawerLabelStyle:{
+              color:"#636060",
+              fontSize:15
+            },
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="home-filled"
@@ -104,10 +114,33 @@ const DashboardLayout = () => {
             )
           }}
         />
+
+        <Drawer.Screen
+          name="profile"
+          options={{
+            title: "Profile Details",
+            drawerLabelStyle:{
+              color:"#636060",
+              fontSize:15
+            },
+            drawerIcon:({color,size}) => (
+              <MaterialIcons
+                name="person"
+                size= {size}
+                color={color}
+              />
+            )
+          }}
+        />
+
         <Drawer.Screen
           name="tasks"
           options={{
-            title: "TASK",
+            title: "PostStory",
+            drawerLabelStyle:{
+              color:"#636060",
+              fontSize:15
+            },
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="task"
@@ -121,7 +154,11 @@ const DashboardLayout = () => {
         <Drawer.Screen
           name="chat"
           options={{
-            title: "CHAT",
+            title: "Chats",
+            drawerLabelStyle:{
+              color:"#636060",
+              fontSize:15
+            },
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="chat-bubble"
