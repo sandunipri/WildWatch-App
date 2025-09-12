@@ -39,7 +39,7 @@ const ProfileScreen = () => {
     <SafeAreaView className={`flex-1 bg-gray-100 pt-${insets.top} pb-${insets.bottom}`}>
     <ScrollView>
 
-    <View className="items-center mb-6 mt-24">
+    <View className="items-center mb-6 mt-5">
       <Image
         source={{
           uri: profile.photoURL 

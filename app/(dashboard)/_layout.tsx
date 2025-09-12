@@ -1,10 +1,11 @@
-import { View, Text, SafeAreaView,TouchableOpacity } from "react-native"
+import { View, Text, SafeAreaView,TouchableOpacity,Image } from "react-native"
 import { Drawer } from "expo-router/drawer";
 import { useNavigation } from "expo-router"
 import { DrawerActions } from "@react-navigation/native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import React from "react";
 import FooterTabs from "../../components/footerNav"
+import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 
 
 
@@ -12,18 +13,19 @@ const DashboardLayout = () => {
 
   const navigation = useNavigation();
 
+
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <SafeAreaView className="flex-1 bg-white">
       <Drawer
         screenOptions = {({navigation}) => ({
-          drawerActiveTintColor:"white",
-          drawerInactiveTintColor:"white",
+          drawerActiveTintColor:"black",
+          drawerInactiveTintColor:"black",
           drawerStyle:{
-            backgroundColor:"black",
+            backgroundColor:"white",
             width:280
           },
           drawerWidth: 280,
-          headerTintColor:"black",
+          headerTintColor:"white",
           headerTitleStyle:{
             fontFamily:"Poppins_700Bold",
             fontSize:20,
@@ -43,11 +45,39 @@ const DashboardLayout = () => {
             </TouchableOpacity>
           )
         })} 
+
+         drawerContent={(props) => (
+          <DrawerContentScrollView {...props} className="bg-black flex-1">
+            <View className="items-center my-6">
+              <Image
+                source={{
+                  uri: "https://via.placeholder.com/150", 
+                }}
+                className="w-32 h-32 rounded-full border-4 border-gray-300"
+              />
+              <Text className="text-white mt-2 font-bold text-lg">Username</Text>
+            </View>
+            <DrawerItemList {...props} />
+          </DrawerContentScrollView>
+        )}
       >
+        <Drawer.Screen
+          name="profile"
+          options={{
+            title: "PROFILE",
+            drawerIcon:({color,size}) => (
+              <MaterialIcons
+                name="person"
+                size={size}
+                color={color}
+              />
+            )
+          }}
+        />
         <Drawer.Screen
           name="home"
           options={{
-            title: "dashboard/home",
+            title: "HOME",
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="home-filled"
@@ -60,7 +90,7 @@ const DashboardLayout = () => {
         <Drawer.Screen
           name="tasks"
           options={{
-            title: "dashboard/tasks",
+            title: "TASK",
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="task"
@@ -70,23 +100,11 @@ const DashboardLayout = () => {
             )
           }}
         />
-        <Drawer.Screen
-          name="profile"
-          options={{
-            title: "dashboard/profile",
-            drawerIcon:({color,size}) => (
-              <MaterialIcons
-                name="person"
-                size={size}
-                color={color}
-              />
-            )
-          }}
-        />
+
         <Drawer.Screen
           name="chat"
           options={{
-            title: "dashboard/chat",
+            title: "CHAT",
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="chat-bubble"
