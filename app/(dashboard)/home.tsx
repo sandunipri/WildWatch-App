@@ -16,10 +16,6 @@ const HomeScreen = () => {
 
   const post = new Date(task[0]?.createdAt || 0);
 
-  const taskdate = post.toLocaleDateString();
-  const tasktime = post.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-
   const loadAllTask = async () => {
     try{
       showLoader()
@@ -52,10 +48,6 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 w-full">
-        {/* <Text className="text-center text-4xl font-bold text-green-800 py-4">
-          Home Screen 
-        </Text> */}
-
       <View className="px-6 py-8 bg-green-100 rounded-b-3xl shadow-md">
         <Text className="text-center text-lg text-green-800 font-semibold">
           Welcome to WildWatch!
@@ -107,7 +99,7 @@ const HomeScreen = () => {
                 </Text>
                 </View>
 
-                  <Text className="text-gray-700 text-base">
+                  <Text className="text-gray-700 text-base px-2 mb-3">
                    Description : {task.description}
                   </Text>
 
