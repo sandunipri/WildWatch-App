@@ -85,9 +85,12 @@ const DashboardLayout = () => {
             </View>
             <DrawerItemList {...props} />
 
-            <View>
+            <View className="">
+                <View className="flex-row items-center my-4 mt-10">
+                    <View className="flex-1 h-px bg-black/20" />
+                </View>
               <TouchableOpacity
-              className="flex-row items-center border border-gray-300 rounded-xl py-3 px-3 mt-52 justify-center" 
+              className="flex-row items-center border border-gray-300 rounded-xl py-3 px-3 justify-center" 
               onPress={handleLogOut}
               >
                 <MaterialIcons name="logout" size={20} color="black"/>
@@ -134,6 +137,24 @@ const DashboardLayout = () => {
         />
 
         <Drawer.Screen
+          name="accountSetting"
+          options={{
+            title: "Account Settings",
+            drawerLabelStyle:{
+              color:"#636060",
+              fontSize:15
+            },
+            drawerIcon:({color,size}) => (
+              <MaterialIcons
+                name="manage-accounts"
+                size= {size}
+                color={color}
+              />
+            )
+          }}
+        />
+
+        <Drawer.Screen
           name="tasks"
           options={{
             title: "PostStory",
@@ -144,6 +165,23 @@ const DashboardLayout = () => {
             drawerIcon:({color,size}) => (
               <MaterialIcons
                 name="task"
+                size={size}
+                color={color}
+              />
+            )
+          }}
+        />
+      <Drawer.Screen
+          name="createTask"
+          options={{
+            title: "Add PostStory",
+            drawerLabelStyle:{
+              color:"#636060",
+              fontSize:15
+            },
+            drawerIcon:({color,size}) => (
+              <MaterialIcons
+                name="library-add"
                 size={size}
                 color={color}
               />

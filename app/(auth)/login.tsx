@@ -66,14 +66,14 @@ const Login = () => {
     <Text className="text-lg font-bold text-center mt-4 mb-4  text-white">Sign in to continue your journey
     </Text>
 
-    <View className="mb-5">
+    <View className="mb-4">
       <View className="bg-white/10 rounded-xl px-4 py-3 border border-white/20 flex-row items-center mb-4">
       <TextInput
         placeholder="Email"
         placeholderTextColor="rgba(255, 255, 255, 0.5)"
         value={email}
         onChangeText={setEmail}
-        className="flex-1 text-white  text-lg"
+        className="flex-1 text-white  text-lg "
         keyboardType="email-address"
         autoCapitalize="none"
       />

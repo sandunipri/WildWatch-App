@@ -55,7 +55,7 @@ const Register = () => {
   return (
       <KeyboardAvoidingView
          behavior={Platform.OS === 'android' ? 'padding' : 'height'}
-          className="flex-1 pt-12 bg-black"
+          className="flex-1 bg-black"
         >
         <ScrollView 
         contentContainerStyle={{ flexGrow: 1 }}
@@ -128,7 +128,7 @@ const Register = () => {
 
       <TouchableOpacity
         onPress={handleRegister}
-        className="bg-yellow-400 rounded-xl p-4 mt-8"
+        className="bg-yellow-400 rounded-xl p-4 mt-6"
       >
         {isLoading ? (
           <ActivityIndicator color="#fff" size="large" />
@@ -137,13 +137,13 @@ const Register = () => {
         )}
       </TouchableOpacity>
 
-       <View className="flex-row items-center my-8">
+       <View className="flex-row items-center my-4">
                   <View className="flex-1 h-px bg-white/20" />
                   <Text className="text-white/70 mx-3">Or continue with</Text>
                   <View className="flex-1 h-px bg-white/20" />
-          </View>
+        </View>
 
-          <View className="flex-row justify-center mt-5">
+          <View className="flex-row justify-center">
                    <Pressable
                   className="mt-2"
                   onPress={() => router.push("/login")}

@@ -7,7 +7,7 @@ type TabRoute = "/home" | "/tasks" | "/profile" | "/chat"
 
 const tabs: { href: TabRoute; label: string; icon: keyof typeof MaterialIcons.glyphMap }[] = [
   { href: "/home", label: "Home", icon: "home-filled" },
-  { href: "/tasks", label: "Task", icon: "check-circle" },
+  { href: "/tasks", label: "Task", icon: "post-add" },
   { href: "/profile", label: "Profile", icon: "person" },
   { href: "/chat", label: "chat", icon: "chat" },
 ]
@@ -16,7 +16,7 @@ const FooterNav = () => {
   const pathname = usePathname()
 
   return (
-    <View className="flex-row items-center justify-between pb-6 pt-3 px-8 bg-gray-200 shadow shadow-gray-400">
+    <View className="flex-row items-center justify-between pb-14 border border-t-gray-300 pt-3 px-8 bg-white shadow shadow-gray-400">
       {tabs.map((tab) => {
         const isActive = pathname === tab.href
         return (
