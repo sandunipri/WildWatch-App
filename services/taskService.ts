@@ -20,6 +20,7 @@ export const createTask = async (taskData: Omit<Task, 'id'>): Promise<Task> => {
     const docRef = await addDoc(taskColRef, {
       ...taskData,
       createdAt: new Date().toISOString(),
+      
       updatedAt: new Date().toISOString()
     });
     

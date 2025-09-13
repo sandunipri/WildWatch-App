@@ -62,15 +62,27 @@ const DashboardLayout = () => {
           headerLeft:() => (
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              style={{marginLeft:20}}
+              style={{marginLeft:30}}
             >
+
+              <View className="flex-row items-center">
               <Ionicons
                 name="menu"
-                size={24}
+                size={28}
                 color="black"
               />
+              {/* <Image
+                      source={require("../../assets/images/login/logo.png")}
+                      className="w-32 h-32 rounded-full"
+                      resizeMode="contain"
+                      style={{ maxWidth: 60, maxHeight: 60 }}
+               /> */}
+              </View>              
             </TouchableOpacity>
-          )
+          ),
+            headerRight: () => (
+              <Text className="text-green-900 text-xl ml-4 pr-8 font-bold">WILD-WATCH</Text>
+              )
         })} 
 
          drawerContent={(props) => (

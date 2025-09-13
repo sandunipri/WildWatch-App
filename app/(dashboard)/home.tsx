@@ -14,6 +14,11 @@ const HomeScreen = () => {
   const { hideLoader, showLoader } = useLoader()
   const [refreshing, setRefreshing] = useState(false);
 
+  const post = new Date(task[0]?.createdAt || 0);
+
+  const taskdate = post.toLocaleDateString();
+  const tasktime = post.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
 
   const loadAllTask = async () => {
     try{
@@ -46,10 +51,19 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1 mt-10 w-full">
-        <Text className="text-center text-4xl font-bold text-green-800 py-4">
+      <View className="flex-1 w-full">
+        {/* <Text className="text-center text-4xl font-bold text-green-800 py-4">
           Home Screen 
+        </Text> */}
+
+      <View className="px-6 py-8 bg-green-100 rounded-b-3xl shadow-md">
+        <Text className="text-center text-lg text-green-800 font-semibold">
+          Welcome to WildWatch!
         </Text>
+        <Text className="text-center text-sm text-green-700 mt-2">
+          Stay updated with the latest tasks, posts, and chats. Manage your profile, track your stories, and connect with your community.
+        </Text>
+      </View>
         
         <ScrollView 
           className="flex-1 px-4"
@@ -67,26 +81,51 @@ const HomeScreen = () => {
               </Text>
             </View>
           ) : (
-            task.map((task) => (
+
+            task.map((task) => {
+
+            const postDate = new Date(task.createdAt || task.createdDate || "");
+            const taskDate = postDate.toLocaleDateString();
+            const taskTime = postDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+              return (
               <View
                 key={task.id}
-                className="bg-white p-4 mb-4 rounded-lg border border-gray-200 shadow-sm"
+                className="bg-white p-4 mb-4 rounded-lg border border-gray-200 shadow-lg"
               >
                 {task.image && (
                   <Image 
                     source={{ uri: task.image }} 
-                    className="w-full h-64 rounded-lg mb-3"
+                    className="w-full h-52"
                     resizeMode="cover"
                   />
                 )}
-                <Text className="text-xl font-semibold text-gray-800 mb-2">
+
+                <View className="p-2"> 
+                  <Text className="text-xl font-bold text-center text-gray-800 mb-2">
                   {task.title}
                 </Text>
-                <Text className="text-gray-600 mb-3">
-                  {task.description}
-                </Text> 
+                </View>
+
+                  <Text className="text-gray-700 text-base">
+                   Description : {task.description}
+                  </Text>
+
+                <View className="flex-row justify-between items-center mb-2">
+                  <View className="bg-green-100 px-3 py-1 rounded-full">
+                    <Text className="text-gray-600 mb-1">
+                    Date: {taskDate}
+                  </Text>
+                  </View>
+
+                  <View className="bg-blue-100 px-3 py-1 rounded-full">
+                    <Text className="text-blue-800 text-sm">Time: {taskTime}</Text>
+                  </View>
+                </View>
               </View>
-            ))
+              )
+
+            })
           )}
         </ScrollView>
       </View>
