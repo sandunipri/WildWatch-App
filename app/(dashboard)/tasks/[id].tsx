@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Alert, Image, ScrollView } from "react-native"
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, ScrollView, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Keyboard } from "react-native"
 import { useCameraPermissions, CameraView, CameraType } from "expo-camera"
 import React, {useEffect, useState, useRef} from "react"
 import { useLocalSearchParams, useRouter } from "expo-router"
@@ -201,8 +201,18 @@ const TaskFormScreen = () => {
   }
 
   return (
-    <ScrollView className="flex-1 w-full p-5 bg-green-50 ">
-      <Text className="text-2xl text-center text-green-800 font-bold mb-4">
+    <KeyboardAvoidingView
+    className="flex-1"
+    behavior={Platform.OS === "android" ? "padding" : "height"}
+    keyboardVerticalOffset={Platform.OS === "android" ? 100 : 0}
+  >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <ScrollView
+        className="flex-1 w-full p-5 bg-green-50"
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Text className="text-2xl text-center text-green-800 font-bold mb-4">
         {isNew ? "Add Post" : "Edit Task"}
       </Text>
       
@@ -292,10 +302,13 @@ const TaskFormScreen = () => {
         onPress={handleSubmit}
       >
         <Text className="text-xl text-white text-center">
-          {isNew ? "Add Task" : "Update Task"}
+          {isNew ? "Add Post" : "Update Task"}
         </Text>
       </TouchableOpacity>
-    </ScrollView>
+      </ScrollView>
+    </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
+
   )
 }
 

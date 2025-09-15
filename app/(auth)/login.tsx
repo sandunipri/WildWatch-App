@@ -100,7 +100,7 @@ const Login = () => {
  
       <TouchableOpacity
         onPress={handleLogin}
-        className="bg-yellow-400 rounded-xl p-4 mt-8"
+        className="bg-green-400 rounded-xl p-4 mt-8"
       >
         {isLoading ? (
           <ActivityIndicator color="#fff" size="large" />
@@ -123,14 +123,14 @@ const Login = () => {
         onPress={() => router.push("/register")}
       >
         <Text className="text-center text-white text-lg">
-          Don't have an account? <Text className="text-yellow-400 font-semibold">Register</Text> 
+          Don't have an account? <Text className="text-green-400 font-semibold">Register</Text> 
         </Text>
       </Pressable>
        </View>
 
        <View className=" items-center">
        <Text className="text-white text-lg">
-        <Text className="text-yellow-400 font-semibold">Forgot Password?</Text> 
+        <Text className="text-green-400 font-semibold">Forgot Password?</Text> 
         </Text>
        </View>
 

@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import React, { useEffect, useState } from "react"
 import { deleteTask, getAllTaskByUserId, taskColRef } from "@/services/taskService"
-import { MaterialIcons } from "@expo/vector-icons"
+import { Feather, MaterialIcons } from "@expo/vector-icons"
 import { useRouter, useSegments } from "expo-router"
 import { Task } from "@/types/task"
 import { useLoader } from "@/context/LoaderContext"
@@ -94,9 +94,10 @@ const TasksScreen = () => {
 
   return (
 
-    <SafeAreaView className={`flex-1 bg-white pt-${insets.top} pb-${insets.bottom}`}>  
-    <View className="flex-1 w-full justify-center align-items-center">
-      <Text className="mt-10 p-5 text-4xl">Tasks screen</Text>
+  <SafeAreaView className={`flex-1 bg-white pt-${insets.top} pb-${insets.bottom}`}>  
+    <View className="flex-1 w-full bg-green-50">
+      <Text className="text-3xl font-bold text-center my-4 text-green-800">Tasks screen</Text>
+
       <View className="absolute bottom-5 right-5 z-40">
         <Pressable
           className="bg-green-900 rounded-full p-5 shadow-lg"
@@ -113,27 +114,27 @@ const TasksScreen = () => {
           return (
             <View
               key={task.id}
-              className="bg-gray-300 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
+              className="bg-gray-100 p-4 mb-3 rounded-lg mx-4 border border-gray-100 "
             >
               {task.image && (
                 <Image source={{ uri: task.image }} className="w-full h-48 mb-2" />
               )}
 
-              <Text className="text-lg font-semibold">{task.title}</Text>
-              <Text className="text-sm text-gray-700 mb-2">
-                {task.description}
+              <Text className="text-lg text-center font-semibold">{task.title}</Text>
+              <Text className="text-base text-gray-800 mb-2">
+                Description : {task.description}
               </Text>
-              <View className="flex-row">
+              <View className="flex-row justify-center space-x-3">
                 <TouchableOpacity
-                  className="bg-yellow-300 px-3 py-1 rounded"
+                  className="bg-yellow-300 p-2 rounded-full mr-4"
                   onPress={() => router.push(`/tasks/${task.id}`)}
                 >
-                  <Text className="text-xl">Edit</Text>
+                  <Feather name="edit" size={20} color="black"/>
                 </TouchableOpacity>
-                <TouchableOpacity className="bg-red-500 px-3 py-1 rounded ml-3"
+                <TouchableOpacity className="bg-red-500 p-2 rounded-full"
                   onPress={() => hadnleDelete(task.id!)}
                 >
-                  <Text className="text-xl">Delete</Text>
+                <Feather name="trash" size={20} color="white"/>
                 </TouchableOpacity>
               </View>
             </View>

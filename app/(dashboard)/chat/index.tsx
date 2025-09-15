@@ -28,18 +28,20 @@ const chatScreen = () => {
         await sendMessage(text)
         setText('')
     }
-
   return (
-    <KeyboardAvoidingView 
-    className = "flex-1 bg-gray-100 p-5"
-    behavior={Platform.OS === "android" ? "padding" : undefined}
+    <View className='flex-1 w-full h-full items-center'>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "android" ? 90 : 0}
+      style={{ flex: 1 }}
     >
 
-    <Text className='text-3xl font-bold text-center mt-10'>Chat Screen</Text>
+    {/* <Text className='text-3xl font-bold text-center border border-b-gray-300 pb-2'>Chat Screen</Text> */}
 
-    <View className='flex-1 w-full h-9 bg-gray-400 '>
+    <View className='flex-1 bg-gray-400 '>
         <FlatList
-        className = "flex-1 bg-gray-100 pt-2"
+        ref={messageListRef}
+        className = "flex-1 p-3 bg-gray-100 pt-2"
         data = {messages}
         keyExtractor={(item) => item.senderId + item.timestamp}
         renderItem={({ item }) => {
@@ -49,7 +51,7 @@ const chatScreen = () => {
                 className={`my-2 flex ${mine ? "items-end" : "items-start"}`}
                 >
                 <View
-                    className={`rounded-xl px-4 py-2 max-w-[80%] ${
+                    className={`rounded-xl px-4 py-2 max-w-full ${
                     mine ? "bg-green-800" : "bg-white"
                     } shadow`}
                 >
@@ -63,16 +65,22 @@ const chatScreen = () => {
                     </Text>
                 </View>
                 </View>
-            )
+            );
     }}
     contentContainerStyle = {{paddingBottom : 80}}
+    onContentSizeChange={() => 
+        messageListRef.current?.scrollToEnd({animated : true})
+    }
+    onLayout={() =>
+        messageListRef.current?.scrollToEnd({animated : true})
+    }
     />     
     </View>
 
 
-    <View className='flex-row justify-between items-center border-t border-gray-300 bg-white p-4'>
+    <View className="flex-row justify-between items-center border-t border-gray-300 bg-white p-4">
         <TextInput
-        className='flex-1 mr-2 bg-gray-200 rounded-full px-4 py-2'
+        className='flex-1 mr-2 text-lg bg-gray-200 rounded-full px-4 py-2'
         placeholder='Type a message'
         value={text}
         onChangeText={setText}
@@ -80,7 +88,7 @@ const chatScreen = () => {
         />
 
         <TouchableOpacity
-        className='bg-blue-500 rounded-full px-4 py-2'
+        className='bg-green-500 rounded-full px-4 py-2'
         onPress={handlesend}
         >
         <Text className='text-white font-bold'>Send</Text>  
@@ -88,6 +96,8 @@ const chatScreen = () => {
             
     </View>
     </KeyboardAvoidingView>
+    </View>
+
     
   )
 }

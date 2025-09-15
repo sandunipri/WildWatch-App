@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TextInput, TouchableOpacity,Image } from 'react-native'
+import { View, Text, ScrollView, TextInput, TouchableOpacity,Image, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import { auth } from '@/firebase';
 import { useRouter } from 'expo-router';
@@ -62,54 +62,66 @@ const updateProfile = () => {
   
 
   return (
-    <ScrollView className='flex-1 bg-gray-100 p-6 mt-10'>
-        <Text className='text-2xl font-bold'>updateProfile</Text>
-    <View>
-        <TouchableOpacity onPress={pickImage}>
-          <Image
-            source={{
-              uri: image ?? user?.photoURL ?? "https://via.placeholder.com/150",
-            }}
-            className="w-40 h-40 rounded-full border-4 border-gray-300"
-          />
-          <Text className="text-blue-500 text-center mt-2">Change Photo</Text>
-        </TouchableOpacity>
+        <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === "android" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "android" ? 100 : 0}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <ScrollView
+            className="flex-1 w-full p-5 bg-green-50"
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps="handled"
+          >
+        <View>
+            <TouchableOpacity onPress={pickImage}
+            className='items-center'
+            >
+              <Image
+                source={{
+                  uri: image ?? user?.photoURL ?? "./../assets/images/login/logo.png",
+                }}
+                className="w-40 h-40 rounded-full border-4 border-gray-300"
+              />
+              <Text className="text-blue-500 text-center mt-2">Change Photo</Text>
+            </TouchableOpacity>
 
 
-        <TextInput
-        placeholder='Name'
-        value={name}
-        onChangeText={setName}
-        className='border border-gray-400 p-2 my-2 rounded-md'
-        />
-        <TextInput
-        placeholder='phone'
-        value={phoneNumber}
-        onChangeText={setPhone}
-        className='border border-gray-400 p-2 my-2 rounded-md'
-        />
-        <TextInput
-        placeholder='address'
-        value={address}
-        onChangeText={setAddress}
-        className='border border-gray-400 p-2 my-2 rounded-md'
-        />
-        <TextInput
-        placeholder='bio'
-        value={bio}
-        onChangeText={setBio}
-        className='border border-gray-400 p-2 my-2 rounded-md'
-        />
-        <TouchableOpacity 
-        onPress={saveUpates}
-        disabled={loading}
-        > 
-            <Text className='bg-blue-400 rounded-md px-6 py-3 my-2'>Update</Text>
-        </TouchableOpacity>
-     
-    </View>
+            <TextInput
+            placeholder='Name'
+            value={name}
+            onChangeText={setName}
+            className='border border-gray-400 p-2 my-2 rounded-md'
+            />
+            <TextInput
+            placeholder='phone'
+            value={phoneNumber}
+            onChangeText={setPhone}
+            className='border border-gray-400 p-2 my-2 rounded-md'
+            />
+            <TextInput
+            placeholder='address'
+            value={address}
+            onChangeText={setAddress}
+            className='border border-gray-400 p-2 my-2 rounded-md'
+            />
+            <TextInput
+            placeholder='bio'
+            value={bio}
+            onChangeText={setBio}
+            className='border border-gray-400 p-2 my-2 rounded-md'
+            />
+            <TouchableOpacity 
+            onPress={saveUpates}
+            disabled={loading}
+            > 
+                <Text className='bg-blue-400 rounded-md px-6 py-3 my-2'>Update</Text>
+            </TouchableOpacity>
+        
+        </View>
     </ScrollView>
-
+    </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
     
   )
 }

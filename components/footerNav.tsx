@@ -7,7 +7,7 @@ type TabRoute = "/home" | "/tasks" | "/profile" | "/chat"
 
 const tabs: { href: TabRoute; label: string; icon: keyof typeof MaterialIcons.glyphMap }[] = [
   { href: "/home", label: "Home", icon: "home-filled" },
-  { href: "/tasks", label: "Task", icon: "post-add" },
+  { href: "/tasks", label: "Post", icon: "post-add" },
   { href: "/profile", label: "Profile", icon: "person" },
   { href: "/chat", label: "chat", icon: "chat" },
 ]

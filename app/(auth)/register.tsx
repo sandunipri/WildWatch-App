@@ -128,7 +128,7 @@ const Register = () => {
 
       <TouchableOpacity
         onPress={handleRegister}
-        className="bg-yellow-400 rounded-xl p-4 mt-6"
+        className="bg-green-400 rounded-xl p-4 mt-6"
       >
         {isLoading ? (
           <ActivityIndicator color="#fff" size="large" />
@@ -150,7 +150,7 @@ const Register = () => {
                 >
                   <Text className="text-center text-white text-lg">
                     Already have an account? 
-                     <Text className="text-yellow-400 font-semibold">Login</Text> 
+                     <Text className="text-green-400 font-semibold">Login</Text> 
                   </Text>
                 </Pressable>
                  </View>
