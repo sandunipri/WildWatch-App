@@ -1,3 +1,5 @@
+import { db } from "@/firebase"
+import { Post } from "@/types/post"
 import {
   addDoc,
   collection,
@@ -10,12 +12,10 @@ import {
   where
 } from "firebase/firestore"
 import api from "./config/api"
-import { Task } from "@/types/task"
-import { db } from "@/firebase"
 
 export const taskColRef = collection(db, "tasks")
 
-export const createTask = async (taskData: Omit<Task, 'id'>): Promise<Task> => {
+export const createTask = async (taskData: Omit<Post, 'id'>): Promise<Post> => {
   try {
     const docRef = await addDoc(taskColRef, {
       ...taskData,
@@ -32,7 +32,7 @@ export const createTask = async (taskData: Omit<Task, 'id'>): Promise<Task> => {
 };
 
 
-export const updateTask = async (id: string, task: Task) => {
+export const updateTask = async (id: string, task: Post) => {
   const docRef = doc(db, "tasks", id)
   const { id: _id, ...taskData } = task
   return await updateDoc(docRef, taskData)
@@ -50,7 +50,7 @@ export const getAllTaskData = async () => {
   const taskList = snapshot.docs.map((taskRef) => ({
     id: taskRef.id,
     ...taskRef.data()
-  })) as Task[]
+  })) as Post[]
   return taskList
 }
 
@@ -58,19 +58,19 @@ export const getTaskById = async (id: string) => {
   const taskDocRef = doc(db, "tasks", id)
   const snapshot = await getDoc(taskDocRef)
   const task = snapshot.exists()
-    ? ({ id: snapshot.id, ...snapshot.data() } as Task)
+    ? ({ id: snapshot.id, ...snapshot.data() } as Post)
     : null
   return task
 }
 
-export const getAllTaskByUserId = async (userId: string): Promise<Task[]> => {
+export const getAllTaskByUserId = async (userId: string): Promise<Post[]> => {
   const q = query(taskColRef, where("userId", "==", userId));
   const querySnapshot = await getDocs(q);
 
   return querySnapshot.docs.map((taskRef) => ({
     id: taskRef.id,
     ...taskRef.data(),
-  })) as Task[];
+  })) as Post[];
 };
 
 export const getAllTask = async () => {

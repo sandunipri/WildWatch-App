@@ -3,11 +3,11 @@ import React from "react"
 import { Link, usePathname } from "expo-router"
 import { MaterialIcons } from "@expo/vector-icons"
 
-type TabRoute = "/home" | "/tasks" | "/profile" | "/chat"
+type TabRoute = "/home" | "/posts" | "/profile" | "/chat"
 
 const tabs: { href: TabRoute; label: string; icon: keyof typeof MaterialIcons.glyphMap }[] = [
   { href: "/home", label: "Home", icon: "home-filled" },
-  { href: "/tasks", label: "Post", icon: "post-add" },
+  { href: "/posts", label: "Post", icon: "post-add" },
   { href: "/profile", label: "Profile", icon: "person" },
   { href: "/chat", label: "chat", icon: "chat" },
 ]

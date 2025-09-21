@@ -1,14 +1,13 @@
-import { View, Text, TextInput, TouchableOpacity, Alert, Image, ScrollView, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Keyboard } from "react-native"
-import { useCameraPermissions, CameraView, CameraType } from "expo-camera"
-import React, {useEffect, useState, useRef} from "react"
-import { useLocalSearchParams, useRouter } from "expo-router"
-import { createTask, getTaskById, updateTask } from "@/services/taskService"
 import { useLoader } from "@/context/LoaderContext"
-import * as MediaLibrary from 'expo-media-library';
-import * as ImagePicker from 'expo-image-picker';
-import { UploadImage } from "@/services/storageService"
 import { auth } from "@/firebase"
-import * as FileSystem from 'expo-file-system';
+import { createTask, getTaskById, updateTask } from "@/services/postService"
+import { UploadImage } from "@/services/storageService"
+import { CameraType, CameraView, useCameraPermissions } from "expo-camera"
+import * as ImagePicker from 'expo-image-picker'
+import * as MediaLibrary from 'expo-media-library'
+import { useLocalSearchParams, useRouter } from "expo-router"
+import React, { useEffect, useRef, useState } from "react"
+import { Alert, Image, Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
 
 const TaskFormScreen = () => {
   const { id } = useLocalSearchParams<{ id?: string }>()
@@ -213,7 +212,7 @@ const TaskFormScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <Text className="text-2xl text-center text-green-800 font-bold mb-4">
-        {isNew ? "Add Post" : "Edit Task"}
+        {isNew ? "Add Post" : "Edit Post"}
       </Text>
       
       {/* Image Preview and Camera */}
@@ -302,7 +301,7 @@ const TaskFormScreen = () => {
         onPress={handleSubmit}
       >
         <Text className="text-xl text-white text-center">
-          {isNew ? "Add Post" : "Update Task"}
+          {isNew ? "Add Post" : "Update Post"}
         </Text>
       </TouchableOpacity>
       </ScrollView>

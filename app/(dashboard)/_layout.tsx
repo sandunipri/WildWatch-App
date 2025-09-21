@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView,TouchableOpacity,Image } from "react-native"
 import { Drawer } from "expo-router/drawer";
-import { useNavigation } from "expo-router"
+import { Link, useNavigation } from "expo-router"
 import { DrawerActions } from "@react-navigation/native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import React, { useEffect, useState } from "react";
@@ -71,12 +71,6 @@ const DashboardLayout = () => {
                 size={28}
                 color="black"
               />
-              {/* <Image
-                      source={require("../../assets/images/login/logo.png")}
-                      className="w-32 h-32 rounded-full"
-                      resizeMode="contain"
-                      style={{ maxWidth: 60, maxHeight: 60 }}
-               /> */}
               </View>              
             </TouchableOpacity>
           ),
@@ -106,7 +100,7 @@ const DashboardLayout = () => {
               onPress={handleLogOut}
               >
                 <MaterialIcons name="logout" size={20} color="black"/>
-                <Text className="text-black text-lg ml-4">LOGOUT</Text> 
+                <Text className="text-black text-lg ml-4"><Link href="/login">Logout</Link></Text> 
               </TouchableOpacity>
             </View>
           </DrawerContentScrollView>
@@ -167,7 +161,7 @@ const DashboardLayout = () => {
         />
 
         <Drawer.Screen
-          name="tasks"
+          name="posts"
           options={{
             title: "PostStory",
             drawerLabelStyle:{

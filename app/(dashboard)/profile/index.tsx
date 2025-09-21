@@ -14,6 +14,8 @@ const ProfileScreen = () => {
     const user = auth.currentUser
     const [profile, setProfile] = useState<User | null>(null);
 
+    const currentDate = new Date().toLocaleDateString();
+
     const loadProfile = async () => {
       if (user){
         const profileData = await getUserById(user.uid)
@@ -50,7 +52,7 @@ const ProfileScreen = () => {
       />
       <Text className="text-3xl font-bold">{profile.name}</Text>
       <Text className="text-gray-600">{profile.email}</Text>
-      <Text className="text-gray-500">Joined: {new Date(profile.createdAt).toDateString()}</Text>
+      <Text className="text-gray-500">Joined: {currentDate}</Text>
 
     </View>
 
@@ -83,7 +85,7 @@ const ProfileScreen = () => {
         {/* Actions */}
     <View className="bg-white rounded-xl shadow-sm p-4">
       <TouchableOpacity className="flex-row items-center py-3 border-b border-gray-200"
-      onPress={()=>router.push("/(dashboard)/profile/updateProfile")}
+      onPress={()=>router.push("/(dashboard)/accountSetting")}
       >
         <Ionicons name="settings-outline" size={22} color="#374151" />
         <Text className="ml-3 text-gray-800">Account Settings</Text>

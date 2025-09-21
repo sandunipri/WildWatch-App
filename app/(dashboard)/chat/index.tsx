@@ -31,7 +31,7 @@ const chatScreen = () => {
   return (
     <View className='flex-1 w-full h-full items-center'>
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "android" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "android" ? 90 : 0}
       style={{ flex: 1 }}
     >
@@ -41,7 +41,7 @@ const chatScreen = () => {
     <View className='flex-1 bg-gray-400 '>
         <FlatList
         ref={messageListRef}
-        className = "flex-1 p-3 bg-gray-100 pt-2"
+        className = "flex-1 p-4 bg-gray-100 pt-2 min-w-full"
         data = {messages}
         keyExtractor={(item) => item.senderId + item.timestamp}
         renderItem={({ item }) => {
@@ -78,7 +78,7 @@ const chatScreen = () => {
     </View>
 
 
-    <View className="flex-row justify-between items-center border-t border-gray-300 bg-white p-4">
+    <View className="flex-row justify-between items-center border-t border-gray-300 p-4">
         <TextInput
         className='flex-1 mr-2 text-lg bg-gray-200 rounded-full px-4 py-2'
         placeholder='Type a message'

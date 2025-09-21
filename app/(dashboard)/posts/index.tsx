@@ -1,27 +1,26 @@
-import {
-  View,
-  Text,
-  Pressable,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-  Image,
-  SafeAreaView
-} from "react-native"
-import React, { useEffect, useState } from "react"
-import { deleteTask, getAllTaskByUserId, taskColRef } from "@/services/taskService"
+import { useLoader } from "@/context/LoaderContext"
+import { auth } from "@/firebase"
+import { deleteTask, getAllTaskByUserId, taskColRef } from "@/services/postService"
+import { Post } from "@/types/post"
 import { Feather, MaterialIcons } from "@expo/vector-icons"
 import { useRouter, useSegments } from "expo-router"
-import { Task } from "@/types/task"
-import { useLoader } from "@/context/LoaderContext"
-import { onSnapshot } from "firebase/firestore"
+import { onSnapshot, query, where } from "firebase/firestore"
+import React, { useEffect, useState } from "react"
+import {
+  Alert,
+  Image,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { auth } from "@/firebase"
-import { query, where } from "firebase/firestore";
 
 
 const TasksScreen = () => {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Post[]>([])
   const segment = useSegments()
   const router = useRouter()
   const { hideLoader, showLoader } = useLoader()
@@ -62,7 +61,7 @@ const TasksScreen = () => {
       const taskList = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      })) as Task[];
+      })) as Post[];
       setTasks(taskList);
     },
     (err) => console.error(err)
@@ -72,7 +71,7 @@ const TasksScreen = () => {
 
 
   const hadnleDelete = (id: string) => {
-    Alert.alert("Alert Title", "Alert Desc", [
+    Alert.alert("Delete Post", "Are you sure you want to delete this post?", [
       { text: "Cancel" },
       {
         text: "Delete",
@@ -102,7 +101,7 @@ const TasksScreen = () => {
         <Pressable
           className="bg-green-900 rounded-full p-5 shadow-lg"
           onPress={() => {
-            router.push("/tasks/new")
+            router.push("/posts/new")
           }}
         >
           <MaterialIcons name="add" size={28} color={"#fff"} />
@@ -127,7 +126,7 @@ const TasksScreen = () => {
               <View className="flex-row justify-center space-x-3">
                 <TouchableOpacity
                   className="bg-yellow-300 p-2 rounded-full mr-4"
-                  onPress={() => router.push(`/tasks/${task.id}`)}
+                  onPress={() => router.push(`/posts/${task.id}`)}
                 >
                   <Feather name="edit" size={20} color="black"/>
                 </TouchableOpacity>

@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { updateUser } from '@/services/userService';
 import { UploadImage } from '@/services/storageService';
 import * as ImagePicker from "expo-image-picker";
+import { Ionicons } from '@expo/vector-icons';
 
 const updateProfile = () => {
 
@@ -74,48 +75,61 @@ const updateProfile = () => {
             keyboardShouldPersistTaps="handled"
           >
         <View>
-            <TouchableOpacity onPress={pickImage}
-            className='items-center'
+
+          <TouchableOpacity onPress={pickImage}
+            className='items-center mb-5'
             >
-              <Image
-                source={{
-                  uri: image ?? user?.photoURL ?? "./../assets/images/login/logo.png",
-                }}
-                className="w-40 h-40 rounded-full border-4 border-gray-300"
+            <View className="w-40 h-40 rounded-full border-4 border-gray-300 items-center justify-center overflow-hidden">
+              {
+              image && user?.photoURL ? (
+                  <Image
+                    source={{
+                      uri: image ?? user?.photoURL ?? "./../assets/images/login/logo.png",
+                    }}
+                    className="w-40 h-40 rounded-full border-4 border-gray-300"
               />
-              <Text className="text-blue-500 text-center mt-2">Change Photo</Text>
-            </TouchableOpacity>
+                ):(
+                  <Ionicons name="camera" size={30} color="black" />
+                )
+              }
+
+            </View>
+          </TouchableOpacity>
+
 
 
             <TextInput
             placeholder='Name'
             value={name}
             onChangeText={setName}
-            className='border border-gray-400 p-2 my-2 rounded-md'
+            className='border border-gray-400 p-3 text-lg my-3 rounded-md'
             />
             <TextInput
             placeholder='phone'
             value={phoneNumber}
             onChangeText={setPhone}
-            className='border border-gray-400 p-2 my-2 rounded-md'
+            className='border border-gray-400 p-3 text-lg my-3 rounded-md'
             />
             <TextInput
             placeholder='address'
             value={address}
             onChangeText={setAddress}
-            className='border border-gray-400 p-2 my-2 rounded-md'
+            className='border border-gray-400 p-3 text-lg my-3 rounded-md'
             />
             <TextInput
             placeholder='bio'
             value={bio}
+            numberOfLines={4}
+            textAlignVertical="top"
             onChangeText={setBio}
-            className='border border-gray-400 p-2 my-2 rounded-md'
+            className='border border-gray-400 p-3 text-lg my-3 rounded-md'
             />
             <TouchableOpacity 
+            className='bg-green-400 rounded-md text-center px-6 py-3 my-2'
             onPress={saveUpates}
             disabled={loading}
             > 
-                <Text className='bg-blue-400 rounded-md px-6 py-3 my-2'>Update</Text>
+                <Text className='text-white text-lg text-center'>Update</Text>
             </TouchableOpacity>
         
         </View>

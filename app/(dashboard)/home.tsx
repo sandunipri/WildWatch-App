@@ -1,15 +1,14 @@
-import { View, Text, SafeAreaView, ScrollView,Image } from "react-native"
-import React, { useEffect, useState } from "react"
-import { Task } from "@/types/task"
-import { useRouter } from "expo-router"
 import { useLoader } from "@/context/LoaderContext"
-import { getAllTaskData } from "@/services/taskService"
-import { RefreshControl } from "react-native"
+import { getAllTaskData } from "@/services/postService"
+import { Post } from "@/types/post"
+import { useRouter } from "expo-router"
+import React, { useEffect, useState } from "react"
+import { Image, RefreshControl, SafeAreaView, ScrollView, Text, View } from "react-native"
 
 
 const HomeScreen = () => {
 
-  const[task, settask] = useState<Task[]>([])
+  const[task, settask] = useState<Post[]>([])
   const router = useRouter()
   const { hideLoader, showLoader } = useLoader()
   const [refreshing, setRefreshing] = useState(false);
@@ -99,7 +98,7 @@ const HomeScreen = () => {
                 </Text>
                 </View>
 
-                  <Text className="text-gray-700 text-base px-2 mb-3">
+                  <Text className="text-gray-700 text-bold text-base px-2 mb-3">
                    Description : {task.description}
                   </Text>
 
