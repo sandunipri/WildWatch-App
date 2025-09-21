@@ -1,9 +1,9 @@
-# Welcome to your Expo app 👋
+# Welcome to WildWatch app 
 
 # Mobile Application Project
 
 ## Project Overview
-This project is a **cross-platform mobile application** developed as the final coursework.  
+This project is a **WildWatch mobile Application** developed as the final coursework.  
 The app includes user authentication, CRUD functionality, state management, and intuitive navigation.  
 
 The application was developed using **React Native Expo** and integrates a backend for persistent data storage and authentication.
@@ -12,25 +12,25 @@ The application was developed using **React Native Expo** and integrates a backe
 
 ## Features
 - **User Authentication:** Sign up, login, and secure user sessions (Firebase Auth / JWT).  
-- **CRUD Operations:** Create, Read, Update, and Delete for the main data model (e.g., Tasks, Expenses, or Notes).  
+- **CRUD Operations:** Create, Read, Update, and Delete for the main data model.  
 - **State Management:** Implemented with Redux / React Context for global state handling.  
-- **Navigation:** Stack or Tab navigation for smooth user experience.  
+- **Navigation:** Stack or Tab navigation and Toggle/Drawer navigation for smooth user experience.  
 - **Responsive UI:** Mobile-friendly, intuitive, and user-friendly interface.  
 - **Builds:** Tested on Android (APK included) and optionally iOS.  
 
 Optional Enhancements:  
-- Push notifications, camera integration, geolocation, and other native APIs.
+- Push notifications, camera integration and other native APIs.
 
 ---
 
 ## Installation & Setup
 
 ### Prerequisites
-- Node.js >= 16
-- npm / yarn
+- Node.js 
+- npm 
 - Expo CLI
-- Android Studio or Xcode (for emulators)
-- Firebase account (if using Firebase backend)
+- Android Studio 
+- Firebase account
 
 ### Steps
 1. **Clone the repository**
