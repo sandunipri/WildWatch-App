@@ -35,10 +35,8 @@ Optional Enhancements:
 ### Steps
 1. **Clone the repository**
    ```bash
-   [git clone https://github.com/yourusername/your-repo.git
-   cd your-repo](https://github.com/sandunipri/WildWatch-App.git)
-
-
+      git clone https://github.com/sandunipri/WildWatch-App.git
+      cd WildWatch-App
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
