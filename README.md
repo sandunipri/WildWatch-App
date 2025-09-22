@@ -38,6 +38,10 @@ Optional Enhancements:
       git clone https://github.com/sandunipri/WildWatch-App.git
       cd WildWatch-App
 
+## Demo Video  
+Watch the demo on YouTube  [Click Here]([https://www.youtube.com/watch?v=YOUR_VIDEO_ID](https://youtu.be/FRHbsyDPzjk))
+
+
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started
