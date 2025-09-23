@@ -43,7 +43,7 @@ Watch the demo on YouTube
 (https://youtu.be/FRHbsyDPzjk)
 
 ## WildWatch App apk
-((https://expo.dev/artifacts/eas/dLuKMNFDBAbHSw7nyQGe8T.apk))
+(https://expo.dev/artifacts/eas/dLuKMNFDBAbHSw7nyQGe8T.apk)
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
