@@ -39,8 +39,11 @@ Optional Enhancements:
       cd WildWatch-App
 
 ## Demo Video  
-Watch the demo on YouTube  [Click Here]([https://www.youtube.com/watch?v=YOUR_VIDEO_ID](https://youtu.be/FRHbsyDPzjk))
+Watch the demo on YouTube 
+(https://youtu.be/FRHbsyDPzjk)
 
+## WildWatch App apk
+(https://expo.dev/artifacts/eas/cx7nMYyLy4386JJtWtBaXP.apk)
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
